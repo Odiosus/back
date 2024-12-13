@@ -7,6 +7,7 @@ class Book(models.Model):
     description = models.TextField("Описание")
     video_url = models.URLField("Ссылка на видео", blank=True, null=True, help_text="Ссылка на видео книги")
     price_url = models.URLField("Ссылка на покупку", blank=True, null=True, help_text="Ссылка на покупку книги")
+    motion_object = models.FileField("Файл движения (3D-объект)", upload_to="motion_object/", blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -43,3 +44,17 @@ class Review(models.Model):
     class Meta:
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
+
+
+class ReviewPicture(models.Model):
+    """Картинки отзывов"""
+    title = models.CharField("Название", max_length=100, blank=True, null=True)
+    image = models.ImageField("Изображение", upload_to="review_picture/")
+    review = models.ForeignKey(Review, verbose_name="Отзыв", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Картинка отзыва"
+        verbose_name_plural = "Картинки отзывов"
