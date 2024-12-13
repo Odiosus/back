@@ -27,8 +27,8 @@ class BookPicture(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = "Страница книги"
-        verbose_name_plural = "Страницы книги"
+        verbose_name = "Фото страниц книги"
+        verbose_name_plural = "Фото страниц книги"
 
 
 class Review(models.Model):
