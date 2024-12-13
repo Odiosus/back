@@ -1,7 +1,61 @@
 from django.contrib import admin
 from django.contrib import messages
-from .models import Review
+from .models import Review, Book, BookPicture
 from .services import ReviewService
+
+
+# Инлайн для модели BookPicture
+class BookPictureInline(admin.TabularInline):
+    model = BookPicture
+    extra = 1
+    fields = ('title', 'image')
+
+
+@admin.register(Book)
+class BookAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description_short', 'video_url', 'price_url', 'motion_object_link')
+    search_fields = ('title', 'description')
+    list_filter = ('title',)
+    list_editable = ('video_url', 'price_url')
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'description', 'video_url', 'price_url', 'motion_object')
+        }),
+    )
+    inlines = [BookPictureInline]
+
+    def description_short(self, obj):
+        return obj.description[:50] + '...' if len(obj.description) > 50 else obj.description
+
+    description_short.short_description = 'Описание'
+
+    def motion_object_link(self, obj):
+        if obj.motion_object:
+            return f'<a href="{obj.motion_object.url}" target="_blank">Скачать</a>'
+        return 'Не загружен'
+
+    motion_object_link.short_description = 'Файл движения'
+    motion_object_link.allow_tags = True
+
+
+@admin.register(BookPicture)
+class BookPictureAdmin(admin.ModelAdmin):
+    list_display = ('title', 'image_preview', 'book')
+    search_fields = ('title', 'book__title')
+    list_filter = ('book',)
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'image', 'book')
+        }),
+    )
+
+    def image_preview(self, obj):
+        if obj.image:
+            return f'<img src="{obj.image.url}" width="100" height="100" />'
+        return 'Нет изображения'
+
+    image_preview.short_description = 'Превью'
+    image_preview.allow_tags = True
 
 
 @admin.register(Review)
