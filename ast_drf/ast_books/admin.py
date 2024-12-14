@@ -16,7 +16,7 @@ class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'description_short', 'video_url', 'price_url', 'motion_object_link')
     search_fields = ('title', 'description')
     list_filter = ('title',)
-    list_editable = ('video_url', 'price_url')
+    # list_editable = ('video_url', 'price_url')
     fieldsets = (
         (None, {
             'fields': ('title', 'description', 'video_url', 'price_url', 'motion_object')
@@ -31,10 +31,10 @@ class BookAdmin(admin.ModelAdmin):
 
     def motion_object_link(self, obj):
         if obj.motion_object:
-            return f'<a href="{obj.motion_object.url}" target="_blank">Скачать</a>'
+            return f'Файл загружен'
         return 'Не загружен'
 
-    motion_object_link.short_description = 'Файл движения'
+    motion_object_link.short_description = 'Файл движения (3D-объект)'
     motion_object_link.allow_tags = True
 
 
@@ -75,7 +75,7 @@ class ReviewAdmin(admin.ModelAdmin):
         # Уведомляем администратора о результате
         self.message_user(
             request,
-            f"Successfully updated {count} reviews.",
+            f"Успешно обновлено {count} отзывов.",
             messages.SUCCESS
         )
 
