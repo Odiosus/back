@@ -18,3 +18,9 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ['id', 'author', 'create', 'text', 'pros']
+
+
+class ReviewPictureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BookPicture
+        fields = ['id', 'title', 'image', 'review']
