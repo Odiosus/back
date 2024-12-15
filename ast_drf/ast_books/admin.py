@@ -13,13 +13,13 @@ class BookPictureInline(admin.TabularInline):
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description_short', 'video_url', 'price_url', 'motion_object_link')
+    list_display = ('title', 'description_short', 'author', 'video_url', 'price_url', 'motion_object_link')
     search_fields = ('title', 'description')
     list_filter = ('title',)
     # list_editable = ('video_url', 'price_url')
     fieldsets = (
         (None, {
-            'fields': ('title', 'description', 'video_url', 'price_url', 'motion_object')
+            'fields': ('title', 'description', 'author', 'video_url', 'price_url', 'motion_object')
         }),
     )
     inlines = [BookPictureInline]

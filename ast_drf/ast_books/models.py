@@ -5,6 +5,7 @@ class Book(models.Model):
     """Книги"""
     title = models.CharField("Название", max_length=100)
     description = models.TextField("Описание")
+    author = models.CharField("Автор", max_length=100)
     video_url = models.URLField("Ссылка на видео", blank=True, null=True, help_text="Ссылка на видео книги")
     price_url = models.URLField("Ссылка на покупку", blank=True, null=True, help_text="Ссылка на покупку книги")
     motion_object = models.FileField("Файл движения (3D-объект)", upload_to="motion_object/", blank=True, null=True)
