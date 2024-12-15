@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib import messages
-from .models import Review, Book, BookPicture
+from .models import Review, Book, BookPicture, ReviewPicture
 from .services import ReviewService
 
 
@@ -90,3 +90,22 @@ class ReviewAdmin(admin.ModelAdmin):
 
     short_text.short_description = 'Текст отзыва'
     short_pros.short_description = 'Плюсы'
+
+
+@admin.register(ReviewPicture)
+class ReviewPictureAdmin(admin.ModelAdmin):
+    list_display = ('title', 'image_preview')
+    search_fields = ('title',)
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'image')
+        }),
+    )
+
+    def image_preview(self, obj):
+        if obj.image:
+            return f'<img src="{obj.image.url}" width="100" height="100" />'
+        return 'Нет изображения'
+
+    image_preview.short_description = 'Превью'
+    image_preview.allow_tags = True

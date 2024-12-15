@@ -51,7 +51,6 @@ class ReviewPicture(models.Model):
     """Картинки отзывов"""
     title = models.CharField("Название", max_length=100, blank=True, null=True)
     image = models.ImageField("Изображение", upload_to="review_picture/")
-    review = models.ForeignKey(Review, verbose_name="Отзыв", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
