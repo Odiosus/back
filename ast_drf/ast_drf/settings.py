@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'ast_books',
     'rest_framework',
     'drf_yasg',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -286,3 +287,7 @@ LOGGING = {
         }
     }
 }
+
+CRONJOBS = [
+    ('0 0 */2 * *', 'ast_books.management.commands.update_reviews.Command'),
+]
