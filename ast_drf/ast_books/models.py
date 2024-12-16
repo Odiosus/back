@@ -6,9 +6,7 @@ class Book(models.Model):
     title = models.CharField("Название", max_length=100)
     description = models.TextField("Описание")
     author = models.CharField("Автор", max_length=100)
-    video_url = models.URLField("Ссылка на видео", blank=True, null=True, help_text="Ссылка на видео книги")
     price_url = models.URLField("Ссылка на покупку", blank=True, null=True, help_text="Ссылка на покупку книги")
-    motion_object = models.FileField("Файл движения (3D-объект)", upload_to="motion_object/", blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -28,8 +26,8 @@ class BookPicture(models.Model):
         return self.title or "Untitled Book"
 
     class Meta:
-        verbose_name = "Фото страниц книги"
-        verbose_name_plural = "Фото страниц книги"
+        verbose_name = "Изображение страниц книги"
+        verbose_name_plural = "Изображения страниц книги"
 
 
 class Review(models.Model):
