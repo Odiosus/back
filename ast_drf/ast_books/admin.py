@@ -23,13 +23,12 @@ class BookPictureInline(admin.TabularInline):
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description_short', 'author', 'video_url', 'price_url', 'motion_object_link')
+    list_display = ('title', 'description_short', 'author', 'price_url')
     search_fields = ('title', 'description')
     list_filter = ('title',)
-    # list_editable = ('video_url', 'price_url')
     fieldsets = (
         (None, {
-            'fields': ('title', 'description', 'author', 'video_url', 'price_url', 'motion_object')
+            'fields': ('title', 'description', 'author', 'price_url')
         }),
     )
     inlines = [BookPictureInline]
@@ -38,14 +37,6 @@ class BookAdmin(admin.ModelAdmin):
         return obj.description[:50] + '...' if len(obj.description) > 50 else obj.description
 
     description_short.short_description = 'Описание'
-
-    def motion_object_link(self, obj):
-        if obj.motion_object:
-            return f'Файл загружен'
-        return 'Не загружен'
-
-    motion_object_link.short_description = 'Файл движения (3D-объект)'
-    motion_object_link.allow_tags = True
 
 
 @admin.register(BookPicture)
