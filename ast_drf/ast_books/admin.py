@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.contrib import messages
+from django.utils.safestring import mark_safe
+
 from .models import Review, Book, BookPicture, ReviewPicture
 from .services import ReviewService
 
@@ -9,6 +11,14 @@ class BookPictureInline(admin.TabularInline):
     model = BookPicture
     extra = 1
     fields = ('title', 'image')
+    readonly_fields = ("image_preview",)
+
+    def image_preview(self, obj):
+        if obj.image:
+            return mark_safe(f'<img src={obj.image.url} width="100" height="110"')
+        return 'Нет изображения'
+
+    image_preview.short_description = "Превью"
 
 
 @admin.register(Book)
@@ -40,22 +50,22 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(BookPicture)
 class BookPictureAdmin(admin.ModelAdmin):
-    list_display = ('title', 'image_preview', 'book')
+    list_display = ('book', 'image_preview', 'title')
     search_fields = ('title', 'book__title')
     list_filter = ('book',)
     fieldsets = (
         (None, {
-            'fields': ('title', 'image', 'book')
+            'fields': ('book', 'title', 'image',)
         }),
     )
 
     def image_preview(self, obj):
         if obj.image:
-            return f'<img src="{obj.image.url}" width="100" height="100" />'
+            return mark_safe(f'<img src={obj.image.url} width="100" height="110"')
         return 'Нет изображения'
 
     image_preview.short_description = 'Превью'
-    image_preview.allow_tags = True
+    # image_preview.allow_tags = True
 
 
 @admin.register(Review)
@@ -104,8 +114,7 @@ class ReviewPictureAdmin(admin.ModelAdmin):
 
     def image_preview(self, obj):
         if obj.image:
-            return f'<img src="{obj.image.url}" width="100" height="100" />'
+            return mark_safe(f'<img src={obj.image.url} width="100" height="110"')
         return 'Нет изображения'
 
     image_preview.short_description = 'Превью'
-    image_preview.allow_tags = True

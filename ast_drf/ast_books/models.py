@@ -25,7 +25,7 @@ class BookPicture(models.Model):
     book = models.ForeignKey(Book, verbose_name="Книга", on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
+        return self.title or "Untitled Book"
 
     class Meta:
         verbose_name = "Фото страниц книги"
@@ -53,7 +53,7 @@ class ReviewPicture(models.Model):
     image = models.ImageField("Изображение", upload_to="review_picture/")
 
     def __str__(self):
-        return self.title
+        return self.title or "Default"
 
     class Meta:
         verbose_name = "Картинка отзыва"
