@@ -16,6 +16,7 @@ https://github.com/AST-team13/back.git
 python -m venv venv
 ```
 Активируем виртуальное окружение:
+
 на Linux
 ```bash
 source venv/bin/activate
