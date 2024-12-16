@@ -289,5 +289,5 @@ LOGGING = {
 }
 
 CRONJOBS = [
-    ('0 0 */2 * *', 'ast_books.management.commands.update_reviews.Command'),
+    ('0 0 */1 * *', 'ast_books.management.commands.update_reviews.Command'),
 ]
