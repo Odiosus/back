@@ -72,7 +72,7 @@ python manage.py crontab add
 python manage.py crontab show 
 ```
 
-- Удалить задачу:
+- Удалить задачу (если нужно):
 
 ```bash
 python manage.py crontab remove
