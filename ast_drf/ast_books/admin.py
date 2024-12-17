@@ -24,17 +24,17 @@ class BookPictureInline(admin.TabularInline):
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'description_short', 'author', 'price_url')
-    search_fields = ('title', 'description')
+    search_fields = ('title', 'text')
     list_filter = ('title',)
     fieldsets = (
         (None, {
-            'fields': ('title', 'description', 'author', 'price_url')
+            'fields': ('title', 'text', 'author', 'price_url')
         }),
     )
     inlines = [BookPictureInline]
 
     def description_short(self, obj):
-        return obj.description[:50] + '...' if len(obj.description) > 50 else obj.description
+        return obj.text[:50] + '...' if len(obj.text) > 50 else obj.text
 
     description_short.short_description = 'Описание'
 
