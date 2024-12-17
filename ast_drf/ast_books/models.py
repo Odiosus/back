@@ -4,7 +4,7 @@ from django.db import models
 class Book(models.Model):
     """Книги"""
     title = models.CharField("Название", max_length=100)
-    description = models.TextField("Описание")
+    text = models.TextField("Описание")
     author = models.CharField("Автор", max_length=100)
     price_url = models.URLField("Ссылка на покупку", blank=True, null=True, help_text="Ссылка на покупку книги")
 
