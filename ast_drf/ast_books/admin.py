@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib import messages
 from django.utils.safestring import mark_safe
 
-from .models import Review, Book, BookPicture, ReviewPicture
+from .models import Review, Book, BookPicture, ReviewPicture, AudioFile
 from .services import ReviewService
 
 
@@ -23,7 +23,7 @@ class BookPictureInline(admin.TabularInline):
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description_short', 'author', 'price_url')
+    list_display = ('title', 'short_text', 'author', 'price_url')
     search_fields = ('title', 'text')
     list_filter = ('title',)
     fieldsets = (
@@ -33,10 +33,10 @@ class BookAdmin(admin.ModelAdmin):
     )
     inlines = [BookPictureInline]
 
-    def description_short(self, obj):
+    def short_text(self, obj):
         return obj.text[:50] + '...' if len(obj.text) > 50 else obj.text
 
-    description_short.short_description = 'Описание'
+    short_text.short_description = 'Описание'
 
 
 @admin.register(BookPicture)
@@ -56,7 +56,6 @@ class BookPictureAdmin(admin.ModelAdmin):
         return 'Нет изображения'
 
     image_preview.short_description = 'Превью'
-    # image_preview.allow_tags = True
 
 
 @admin.register(Review)
@@ -109,3 +108,10 @@ class ReviewPictureAdmin(admin.ModelAdmin):
         return 'Нет изображения'
 
     image_preview.short_description = 'Превью'
+
+
+@admin.register(AudioFile)
+class AudioFileAdmin(admin.ModelAdmin):
+    list_display = ('title', 'audio_file')
+    search_fields = ('title',)
+    fields = ('title', 'audio_file')

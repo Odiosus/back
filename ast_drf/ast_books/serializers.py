@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Review, Book, BookPicture
+from .models import Review, Book, BookPicture, AudioFile
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -24,3 +24,9 @@ class ReviewPictureSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookPicture
         fields = ['id', 'title', 'image']
+
+
+class AudioFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AudioFile
+        fields = ['id', 'title', 'audio_file']
