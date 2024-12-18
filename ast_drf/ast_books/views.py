@@ -1,8 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, viewsets
-from .models import Review, Book, BookPicture, ReviewPicture
-from .serializers import ReviewSerializer, BookSerializer, BookPictureSerializer, ReviewPictureSerializer
+from .models import Review, Book, BookPicture, ReviewPicture, AudioFile
+from .serializers import ReviewSerializer, BookSerializer, BookPictureSerializer, ReviewPictureSerializer, \
+    AudioFileSerializer
 from .services import ReviewService
 
 
@@ -52,3 +53,8 @@ class ReviewViewSet(BaseReadOnlyViewSet):
 class ReviewPictureViewSet(BaseReadOnlyViewSet):
     queryset = ReviewPicture.objects.all()
     serializer_class = ReviewPictureSerializer
+
+
+class AudioFileViewSet(BaseReadOnlyViewSet):
+    queryset = AudioFile.objects.all()
+    serializer_class = AudioFileSerializer

@@ -56,3 +56,16 @@ class ReviewPicture(models.Model):
     class Meta:
         verbose_name = "Картинка отзыва"
         verbose_name_plural = "Картинки отзывов"
+
+
+class AudioFile(models.Model):
+    """Аудиофайл"""
+    title = models.CharField(max_length=255, blank=True, null=True, verbose_name="Название")
+    audio_file = models.FileField(upload_to='audio/', verbose_name="Аудиофайл")
+
+    def __str__(self):
+        return self.title or "Default"
+
+    class Meta:
+        verbose_name = "Аудиофайл"
+        verbose_name_plural = "Аудиофайлы"
