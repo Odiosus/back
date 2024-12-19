@@ -10,11 +10,20 @@ https://github.com/AST-team13/back.git
 
 ### Создание виртуального окружения
 
-Виртуальное окружение для установки зависимостей.
+Создаем виртуальное окружение для установки зависимостей.
 
 ```bash
 python -m venv venv
-source venv/bin/activate  # Для Windows используйте команду venv\Scripts\activate
+```
+Активируем виртуальное окружение:
+
+на Linux
+```bash
+source venv/bin/activate
+```
+на Windiws
+```bash
+venv\Scripts\activate
 ```
 
 ### Установка зависимостей
