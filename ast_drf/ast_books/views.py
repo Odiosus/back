@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, viewsets
@@ -5,6 +7,17 @@ from .models import Review, Book, BookPicture, ReviewPicture, AudioFile
 from .serializers import ReviewSerializer, BookSerializer, BookPictureSerializer, ReviewPictureSerializer, \
     AudioFileSerializer
 from .services import ReviewService
+
+
+def create_superuser(request):
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser(
+            username='admin',
+            email='admin@example.com',
+            password='securepassword'
+        )
+        return HttpResponse("Superuser created successfully!")
+    return HttpResponse("Superuser already exists.")
 
 
 class BaseReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
