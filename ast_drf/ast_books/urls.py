@@ -13,6 +13,4 @@ urlpatterns = format_suffix_patterns([
     path('books/<int:pk>/picture/<int:picture_pk>/', BookPictureViewSet.as_view({'get': 'retrieve'})),
     path('audio/', AudioFileViewSet.as_view({'get': 'list'})),
     path('audio/<int:pk>/', AudioFileViewSet.as_view({'get': 'retrieve'})),
-    path('create-superuser/', create_superuser, name='create_superuser'),
-
 ])

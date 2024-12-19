@@ -9,17 +9,6 @@ from .serializers import ReviewSerializer, BookSerializer, BookPictureSerializer
 from .services import ReviewService
 
 
-def create_superuser(request):
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser(
-            username='admin',
-            email='admin@example.com',
-            password='securepassword'
-        )
-        return HttpResponse("Superuser created successfully!")
-    return HttpResponse("Superuser already exists.")
-
-
 class BaseReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
     """
     Базовый класс для ReadOnlyViewSet с универсальными ответами.
