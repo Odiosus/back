@@ -83,11 +83,17 @@ WSGI_APPLICATION = 'ast_drf.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='sqlite:///db.sqlite3',  # Значение по умолчанию, если переменная DATABASE_URL не задана
+#         conn_max_age=600,
+#         ssl_require=True  # Обязательно, если вы используете защищённое соединение (например, на Heroku/Render)
+#     )
+# }
+
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',  # Значение по умолчанию, если переменная DATABASE_URL не задана
-        conn_max_age=600,
-        ssl_require=True  # Обязательно, если вы используете защищённое соединение (например, на Heroku/Render)
+        default=os.getenv('DATABASE_URL')
     )
 }
 
