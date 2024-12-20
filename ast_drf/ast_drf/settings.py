@@ -488,3 +488,13 @@ JAZZMIN_UI_TWEAKS = {
 
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Настройка суперпользователя
+if os.getenv('DJANGO_SUPERUSER_USERNAME'):
+    from django.contrib.auth.models import User
+
+    User.objects.create_superuser(
+        username=os.getenv('DJANGO_SUPERUSER_USERNAME'),
+        password=os.getenv('DJANGO_SUPERUSER_PASSWORD'),
+        email=os.getenv('DJANGO_SUPERUSER_EMAIL')
+    )
