@@ -1,1 +1,2 @@
 web: gunicorn ast_drf.wsgi --log-file -
+superuser: python manage.py createsuperuser
